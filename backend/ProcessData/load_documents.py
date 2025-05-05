@@ -28,7 +28,7 @@ def process_pdf(pdf_path):
 
 
 
-    splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+    splitter = RecursiveCharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
     texts = splitter.split_text(text)
 
     docs = [Document(page_content=t) for t in texts]
