@@ -1,0 +1,44 @@
+.formula-container {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.formula-content {
+  display: inline-block;
+  min-width: 100%;
+  text-align: center;
+}
+
+.formula-content .katex {
+  font-size: 1.1em;
+}
+
+.formula-content .katex-display {
+  margin: 1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5em 0;
+}
+
+.formula-error {
+  color: #dc3545;
+  padding: 0.5rem;
+  background-color: #f8d7da;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .formula-content .katex {
+    font-size: 1em;
+  }
+  
+  .formula-container {
+    padding: 0.8rem;
+  }
+} 

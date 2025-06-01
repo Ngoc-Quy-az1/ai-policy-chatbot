@@ -1,0 +1,126 @@
+.chat-message {
+  display: flex;
+  align-items: flex-start;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.chat-message.bot {
+  background-color: #f8f9fa;
+}
+
+.chat-message.user {
+  flex-direction: row-reverse;
+  background: #eaf6ff;
+  justify-content: flex-end;
+}
+
+.chat-message .message-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  margin: 0 0.5rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+}
+
+.chat-message.user .message-avatar {
+  margin: 0 0 0 0.5rem;
+}
+
+.chat-message .message-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  margin: 0;
+}
+
+.chat-message.user .message-content {
+  align-items: flex-end;
+}
+
+.message-text {
+  word-break: break-word;
+  text-align: left;
+  font-size: 1.05rem;
+  margin: 0;
+  padding: 0.1rem 0;
+}
+
+.message-paragraph {
+  margin: 0.5rem 0;
+  text-align: justify;
+}
+
+.message-sentence {
+  margin: 0.3rem 0;
+  line-height: 1.6;
+}
+
+.message-image {
+  margin: 1rem 0;
+  max-width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.message-sources {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: #f1f3f5;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.message-sources small {
+  color: #666;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.message-sources ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.message-sources li {
+  margin: 0.2rem 0;
+  color: #444;
+}
+
+.message-timestamp {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.3rem;
+  text-align: right;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .chat-message .message-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+  .message-text {
+    font-size: 0.98rem;
+  }
+  
+  .message-paragraph {
+    font-size: 0.9rem;
+  }
+} 
