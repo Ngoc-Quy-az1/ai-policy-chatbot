@@ -93,7 +93,6 @@ const ChatMessage = ({ message, isBot, isLoading }) => {
         {/* Hiển thị nguồn tham khảo nếu có */}
         {isBot && message.sources && (
           <div className="message-sources">
-            <small>Nguồn tham khảo:</small>
             <ul>
               {message.sources.tables && (
                 <li>Bảng: {message.sources.tables}</li>

@@ -40,7 +40,7 @@ llm = ChatOpenAI(
     max_tokens=1024,  
     frequency_penalty=0.1,
     presence_penalty=0.1,
-    request_timeout=30  # Thêm timeout
+    request_timeout=30  
 )
 
 # Tạo compressor nhẹ hơn
@@ -198,6 +198,12 @@ def ask_policy_bot(question: str) -> Dict[str, Any]:
         answer = response["answer"]
         source_docs = response.get("source_documents", [])
 
+        # Lấy usage nếu có
+        usage = response.get("usage", {})
+        prompt_tokens = usage.get("prompt_tokens", 0)
+        completion_tokens = usage.get("completion_tokens", 0)
+        total_tokens = usage.get("total_tokens", 0)
+
         # Tìm bảng phù hợp nhất
         table_data = None
         if is_table_question:
@@ -239,7 +245,10 @@ def ask_policy_bot(question: str) -> Dict[str, Any]:
                 "tables": process_table_context(source_docs),
                 "charts": process_chart_context(source_docs),
                 "formulas": process_formula_context(source_docs),
-                "generated_question": response.get("generated_question", question)
+                "generated_question": response.get("generated_question", question),
+                "prompt_tokens": prompt_tokens,
+                "completion_tokens": completion_tokens,
+                "total_tokens": total_tokens
             },
             "metadata": {
                 "is_table_question": is_table_question,

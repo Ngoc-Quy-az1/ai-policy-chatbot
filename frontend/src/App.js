@@ -62,11 +62,16 @@ function App() {
         conversation_id: activeConversationId
       });
 
+      // Truyền đầy đủ các trường từ response.data
       const botMessage = {
         content: response.data.answer,
-        timestamp: new Date().toISOString(),
-        isBot: true,
-        sources: response.data.sources
+        question: response.data.question,
+        response_time: response.data.response_time,
+        token_usage: response.data.token_usage,
+        conversation_id: response.data.conversation_id,
+        timestamp: response.data.timestamp,
+        sources: response.data.sources,
+        isBot: true
       };
 
       setMessages(prev => [...prev, botMessage]);

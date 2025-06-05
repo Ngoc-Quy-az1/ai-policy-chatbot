@@ -83,10 +83,12 @@ def chat():
 
         try:
             print(f"Calling ask_policy_bot with question: {question}")
-            # Get the bot's answer
+            # Bắt đầu tính thời gian
+            start_time = datetime.now()
             response = ask_policy_bot(question)
-            print("Bot response:", response)  # Log bot response
-            
+            end_time = datetime.now()
+            response_time = (end_time - start_time).total_seconds()
+
             # Kiểm tra xem có lỗi không
             if isinstance(response, dict) and "error" in response:
                 error_msg = response["error"]
@@ -127,10 +129,36 @@ def chat():
             conn.close()
 
             # Trả về response với đầy đủ thông tin
-            return jsonify({
+            prompt_tokens = sources.get("prompt_tokens", 0)
+            completion_tokens = sources.get("completion_tokens", 0)
+            total_tokens = prompt_tokens + completion_tokens
+
+            print("Trả về JSON:", {
+                "question": question,
                 "answer": answer,
-                "sources": sources,
-                "conversation_id": conversation_id
+                "response_time": round(response_time, 2),
+                "token_usage": {
+                    "prompt_tokens": prompt_tokens,
+                    "completion_tokens": completion_tokens,
+                    "total_tokens": total_tokens
+                },
+                "conversation_id": conversation_id,
+                "timestamp": end_time.isoformat(),
+                "sources": sources
+            })
+
+            return jsonify({
+                "question": question,
+                "answer": answer,
+                "response_time": round(response_time, 2),
+                "token_usage": {
+                    "prompt_tokens": prompt_tokens,
+                    "completion_tokens": completion_tokens,
+                    "total_tokens": total_tokens
+                },
+                "conversation_id": conversation_id,
+                "timestamp": end_time.isoformat(),
+                "sources": sources
             })
 
         except Exception as bot_error:
@@ -298,3 +326,4 @@ if __name__ == "__main__":
     init_db()
     # Thay đổi cách chạy server để tránh lỗi socket
     app.run(debug=True, use_reloader=False)
+    
